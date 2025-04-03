@@ -1,0 +1,6 @@
+node_modules
+dist
+
+src/pre_transform/*
+!src/pre_transform/grammar
+src/pre_transform/grammar/.antlr
