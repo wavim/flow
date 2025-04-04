@@ -8,37 +8,34 @@ options {
     tokenVocab = FlowLexer;
 }
 
-program
-    : statementList? EOF
+numeral
+    : DecimalInteger
+    | Float
     ;
 
-statementList
-    : statement+
+expression
+    : <assoc = right> expression Power expression
+    | (Plus | Minus) expression
+    | expression (Multiply | Divide | Modulus) expression
+    | expression (Plus | Minus) expression
+    | OpenParen expression CloseParen
+    | numeral
     ;
+//MO TODO expressionSequence, exp (, exp)
 
 statement
     : block
+    | expression SemiColon
     ;
 
 block
     : OpenBrace statementList? CloseBrace
     ;
 
-assignStatement
-    : assignVariant leftValue Assign rightValue
+statementList
+    : statement+
     ;
 
-assignVariant
-    : Ref
-    | Const
+program
+    : statementList? EOF
     ;
-
-leftValue
-    :
-    ;
-
-rightValue
-    :
-    ;
-
-// NOT IN ANYWAY FINISHED, LONG WAY TO GO

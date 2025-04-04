@@ -1,14 +1,32 @@
-//MO DEV this TS version is only for initial rapid prototyping
+// this TS version is only for initial rapid prototyping
 
 import { CharStream, CommonTokenStream } from "antlr4ng";
 import { FlowLexer } from "./pre_transform/FlowLexer";
 import { FlowParser } from "./pre_transform/FlowParser";
 
-const input = ``;
+const input = `-1^2;`;
 const chars = CharStream.fromString(input);
 const lexer = new FlowLexer(chars);
 const tokens = new CommonTokenStream(lexer);
 const parser = new FlowParser(tokens);
 const tree = parser.program();
 
-//MO TODO check ast walkers in antlr
+console.log(format(tree.toStringTree(parser)));
+
+function format(input: string, indent = 0): string {
+	let formatted = "";
+
+	for (const char of input) {
+		if (char === "(") {
+			formatted += `\n${"  ".repeat(indent)}(`;
+			indent += 2;
+		} else if (char === ")") {
+			indent -= 2;
+			formatted += `\n${"  ".repeat(indent)})`;
+		} else {
+			formatted += char;
+		}
+	}
+
+	return formatted;
+}

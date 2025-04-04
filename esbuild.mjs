@@ -5,7 +5,6 @@ const watch = process.argv.includes("--watch");
 
 async function main() {
 	const ctx = await esbuild.context({
-		//MO TODO
 		entryPoints: ["src/index.ts"],
 		bundle: true,
 		format: "esm",
@@ -15,10 +14,7 @@ async function main() {
 		platform: "node",
 		outfile: "dist/index.js",
 		logLevel: "silent",
-		plugins: [
-			/* add to the end of plugins array */
-			esbuildProblemMatcherPlugin,
-		],
+		plugins: [esbuildProblemMatcherPlugin],
 	});
 	if (watch) {
 		await ctx.watch();

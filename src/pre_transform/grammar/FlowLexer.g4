@@ -32,23 +32,36 @@ Return  : 'return';
 // constructs
 OpenBrace  : '{';
 CloseBrace : '}';
+OpenParen  : '(';
+CloseParen : ')';
 Comma      : ',';
 SemiColon  : ';';
 
 // operators
-Assign         : ':=';
-Plus           : '+';
-Minus          : '-';
-Multiply       : '*';
-Divide         : '/';
-Modulus        : '%';
-Power          : '^';
+Assign   : ':=';
+Plus     : '+';
+Minus    : '-';
+Multiply : '*';
+Divide   : '/';
+Modulus  : '%';
+Power    : '^';
+//MO TODO bitops? C used ^
+
+// operator assignments
 PlusAssign     : '+=';
 MinusAssign    : '-=';
 MultiplyAssign : '*=';
 DivideAssign   : '/=';
 ModulusAssign  : '%=';
 PowerAssign    : '^=';
-// bitxor? used ^ in C
+
+// numeric literals
+DecimalInteger: [1-9] [0-9]*;
+Float:
+    DecimalInteger? (DecimalInteger '.' | '.' DecimalInteger) DecimalInteger? (
+        [eE][+-] DecimalInteger
+    )?;
+
+WhiteSpace: [ \t]+ -> channel(HIDDEN);
 
 // NOT IN ANYWAY FINISHED, LONG WAY TO GO
