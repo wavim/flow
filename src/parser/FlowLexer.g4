@@ -3,7 +3,7 @@
 lexer grammar FlowLexer;
 
 options {
-    language = TypeScript;
+    language = Cpp;
 }
 
 channels {

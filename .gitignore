@@ -1,5 +1,2 @@
-dist
-node_modules
-
-src/parser/.antlr
-src/parser/generated
+/cmake-build-debug/
+/src/parser/generated

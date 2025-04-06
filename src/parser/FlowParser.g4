@@ -5,7 +5,7 @@ parser grammar FlowParser;
 
 options {
     tokenVocab = FlowLexer;
-    language = TypeScript;
+    language = Cpp;
 }
 
 program
