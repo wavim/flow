@@ -36,6 +36,15 @@ Skip    : 'skip';
 Break   : 'break';
 Return  : 'return';
 
+// reserved types
+Bool   : 'bool';
+Int    : 'int';
+Float  : 'float';
+String : 'string';
+
+// reserved object
+Std: 'std';
+
 // constructs
 OpenParen    : '(';
 CloseParen   : ')';
@@ -58,12 +67,13 @@ And : '&';
 Or  : '|';
 
 // arithmetic operators
-Plus     : '+';
-Minus    : '-';
-Multiply : '*';
-Divide   : '/';
-Modulus  : '%';
-Power    : '^';
+Plus      : '+';
+Minus     : '-';
+Multiply  : '*';
+Divide    : '/';
+IntDivide : '//';
+Modulus   : '%';
+Power     : '^';
 
 // bitwise operators
 BitNot        : '~';
@@ -73,6 +83,9 @@ BitXor        : '<>';
 BitLeftShift  : '<<';
 BitRightShift : '>>';
 
+// cardinal operator
+Cardinal: '#';
+
 // assignment operator
 Assign: ':=';
 
@@ -81,12 +94,13 @@ AndAssign : '&=';
 OrAssign  : '|=';
 
 // arithmetic compound assignment operators
-PlusAssign     : '+=';
-MinusAssign    : '-=';
-MultiplyAssign : '*=';
-DivideAssign   : '/=';
-ModulusAssign  : '%=';
-PowerAssign    : '^=';
+PlusAssign      : '+=';
+MinusAssign     : '-=';
+MultiplyAssign  : '*=';
+DivideAssign    : '/=';
+IntDivideAssign : '//=';
+ModulusAssign   : '%=';
+PowerAssign     : '^=';
 
 // bitwise compound assignment operators
 BitAndAssign        : '&&=';
@@ -116,7 +130,7 @@ FloatLiteral:
 Identifier: [_a-zA-Z] [_a-zA-Z0-9]*;
 
 // string literal
-StringLiteral: '"' StringCharacter* '"';
+StringLiteral: [rRfF]? '"' StringCharacter* '"';
 
 // whitespace
 WhiteSpace: [ \t]+ -> channel(HIDDEN);
@@ -129,6 +143,6 @@ fragment NoPrefixDecimal: '0' | [1-9] [0-9]+;
 
 fragment FloatExponent: [eE] [+-]? NoPrefixDecimal;
 
-fragment EscapeSequence: '\\' ["btnvfr\\];
+fragment EscapeSequence: '\\' ~[\r\n];
 
 fragment StringCharacter: ~["\r\n\\] | EscapeSequence;
