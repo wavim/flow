@@ -14,8 +14,11 @@ channels {
 MultiLineComment  : '/*' .*? '*/' -> channel(HIDDEN);
 SingleLineComment : '//' ~[\r\n]* -> channel(HIDDEN);
 
-// expression delimiter
-Semicolon: ';';
+// punctuators
+Dot       : '.';
+Comma     : ',';
+Colon     : ':';
+Semicolon : ';';
 
 // reserved keywords
 Ref     : 'ref';
