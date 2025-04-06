@@ -33,6 +33,7 @@ Case    : 'case';
 Default : 'default';
 Skip    : 'skip';
 Break   : 'break';
+Fn      : 'fn';
 Return  : 'return';
 
 // reserved types
@@ -52,8 +53,9 @@ CloseBracket : ']';
 OpenBrace    : '{';
 CloseBrace   : '}';
 
-// lambda arrow
-Arrow: '=>';
+// arrows
+ReturnTypeArrow : '->';
+LambdaFuncArrow : '=>';
 
 // comparison operators
 Equal           : '=';
