@@ -1,18 +1,25 @@
-// $antlr-format alignColons trailing, useTab false
+// $antlr-format alignColons trailing, columnLimit 150, useTab false
 
 lexer grammar FlowLexer;
 
 options {
-    language = TypeScript;
+    language = Cpp;
+}
+
+channels {
+    ERROR
 }
 
 // comments
 MultiLineComment  : '/*' .*? '*/' -> channel(HIDDEN);
 SingleLineComment : '//' ~[\r\n]* -> channel(HIDDEN);
 
+// expression delimiter
+Semicolon: ';';
+
 // reserved keywords
 Ref     : 'ref';
-Const   : 'const';
+Kref    : 'kref';
 If      : 'if';
 Elif    : 'elif';
 Else    : 'else';
@@ -21,33 +28,59 @@ Do      : 'do';
 Until   : 'until';
 For     : 'for';
 In      : 'in';
-Skip    : 'skip';
 Switch  : 'switch';
 Case    : 'case';
 Default : 'default';
-Break   : 'break';
 Pass    : 'pass';
+Skip    : 'skip';
+Break   : 'break';
 Return  : 'return';
 
 // constructs
-OpenBrace  : '{';
-CloseBrace : '}';
-OpenParen  : '(';
-CloseParen : ')';
-Comma      : ',';
-SemiColon  : ';';
+OpenParen    : '(';
+CloseParen   : ')';
+OpenBracket  : '[';
+CloseBracket : ']';
+OpenBrace    : '{';
+CloseBrace   : '}';
 
-// operators
-Assign   : ':=';
+// comparison operators
+Equal           : '=';
+NotEqual        : '!=';
+LessThan        : '<';
+MoreThan        : '>';
+LessThanOrEqual : '<=';
+MoreThanOrEqual : '>=';
+
+// boolean operators
+Not : '!';
+And : '&';
+Or  : '|';
+
+// arithmetic operators
 Plus     : '+';
 Minus    : '-';
 Multiply : '*';
 Divide   : '/';
 Modulus  : '%';
 Power    : '^';
-//MO TODO bitops? C used ^
 
-// operator assignments
+// bitwise operators
+BitNot        : '~';
+BitAnd        : '&&';
+BitOr         : '||';
+BitXor        : '<>';
+BitLeftShift  : '<<';
+BitRightShift : '>>';
+
+// assignment operator
+Assign: ':=';
+
+// boolean compound assignment operators
+AndAssign : '&=';
+OrAssign  : '|=';
+
+// arithmetic compound assignment operators
 PlusAssign     : '+=';
 MinusAssign    : '-=';
 MultiplyAssign : '*=';
@@ -55,13 +88,47 @@ DivideAssign   : '/=';
 ModulusAssign  : '%=';
 PowerAssign    : '^=';
 
-// numeric literals
-DecimalInteger: [1-9] [0-9]*;
-Float:
-    DecimalInteger? (DecimalInteger '.' | '.' DecimalInteger) DecimalInteger? (
-        [eE][+-] DecimalInteger
-    )?;
+// bitwise compound assignment operators
+BitAndAssign        : '&&=';
+BitOrAssign         : '||=';
+BitXorAssign        : '<>=';
+BitLeftShiftAssign  : '<<=';
+BitRightShiftAssign : '>>=';
 
+// null literal
+NullLiteral: 'null';
+
+// boolean literals
+BooleanLiteral: 'true' | 'false';
+
+// integer numerals
+DecIntLiteral : NoPrefixDecimal | '0' [dD] [0-9]+;
+BinIntLiteral : '0' [bB] [01]+;
+OctIntLiteral : '0' [oO] [0-7]+;
+HexIntLiteral : '0' [xX] [0-9a-fA-F]+;
+
+// floating point numeral
+FloatLiteral:
+    NoPrefixDecimal FloatExponent
+    | NoPrefixDecimal? ('.' NoPrefixDecimal | NoPrefixDecimal '.') NoPrefixDecimal? FloatExponent?;
+
+// identifier
+Identifier: [_a-zA-Z] [_a-zA-Z0-9]*;
+
+// string literal
+StringLiteral: '"' StringCharacter* '"';
+
+// whitespace
 WhiteSpace: [ \t]+ -> channel(HIDDEN);
 
-// NOT IN ANYWAY FINISHED, LONG WAY TO GO
+// unexpected
+Unexpected: . -> channel(ERROR);
+
+// fragments
+fragment NoPrefixDecimal: '0' | [1-9] [0-9]+;
+
+fragment FloatExponent: [eE] [+-]? NoPrefixDecimal;
+
+fragment EscapeSequence: '\\' ["btnvfr\\];
+
+fragment StringCharacter: ~["\r\n\\] | EscapeSequence;
