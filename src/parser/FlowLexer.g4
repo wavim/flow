@@ -1,4 +1,4 @@
-// $antlr-format alignColons trailing, columnLimit 150, useTab false
+// $antlr-format alignColons trailing, columnLimit 150, reflowComments false, useTab false
 
 lexer grammar FlowLexer;
 
@@ -17,6 +17,7 @@ SingleLineComment : '//' ~[\r\n]* -> channel(HIDDEN);
 // punctuators
 Dot       : '.';
 Comma     : ',';
+Query     : '?';
 Colon     : ':';
 Semicolon : ';';
 
