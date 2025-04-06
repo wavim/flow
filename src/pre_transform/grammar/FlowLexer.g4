@@ -3,9 +3,10 @@
 lexer grammar FlowLexer;
 
 options {
-    language = Cpp;
+    language = TypeScript;
 }
 
+//MO TODO check if this is even needed
 channels {
     ERROR
 }
@@ -116,9 +117,9 @@ NullLiteral: 'null';
 BooleanLiteral: 'true' | 'false';
 
 // integer numerals
-DecIntLiteral : NoPrefixDecimal | '0' [dD] [0-9]+;
 BinIntLiteral : '0' [bB] [01]+;
 OctIntLiteral : '0' [oO] [0-7]+;
+DecIntLiteral : '0' [dD] [0-9]+ | NoPrefixDecimal;
 HexIntLiteral : '0' [xX] [0-9a-fA-F]+;
 
 // floating point numeral
@@ -140,7 +141,7 @@ WhiteSpace: [ \t]+ -> channel(HIDDEN);
 Unexpected: . -> channel(ERROR);
 
 // fragments
-fragment NoPrefixDecimal: '0' | [1-9] [0-9]+;
+fragment NoPrefixDecimal: '0' | [1-9] [0-9]*;
 
 fragment FloatExponent: [eE] [+-]? NoPrefixDecimal;
 
