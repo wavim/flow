@@ -40,6 +40,7 @@ Fn      : 'fn';
 Return  : 'return';
 
 // reserved types
+Void   : 'void';
 Bool   : 'bool';
 Int    : 'int';
 Float  : 'float';
