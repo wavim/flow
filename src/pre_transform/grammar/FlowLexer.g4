@@ -6,7 +6,6 @@ options {
     language = TypeScript;
 }
 
-//MO TODO check if this is even needed
 channels {
     ERROR
 }
