@@ -31,7 +31,6 @@ In      : 'in';
 Switch  : 'switch';
 Case    : 'case';
 Default : 'default';
-Pass    : 'pass';
 Skip    : 'skip';
 Break   : 'break';
 Return  : 'return';
