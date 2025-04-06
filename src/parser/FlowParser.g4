@@ -9,15 +9,15 @@ options {
 }
 
 program
-    : statement_list? EOF
+    : statementList? EOF
     ;
 
-statement_list
+statementList
     : (block | statement Semicolon)+
     ;
 
 block
-    : OpenBrace enclosed = statement_list? CloseBrace
+    : OpenBrace enclosed = statementList? CloseBrace
     ;
 
 statement

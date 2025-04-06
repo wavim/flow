@@ -11,7 +11,7 @@ public:
 
   std::any visitProgram(FlowParser::ProgramContext *context) override;
   std::any
-  visitStatement_list(FlowParser::Statement_listContext *context) override;
+  visitStatementList(FlowParser::StatementListContext *context) override;
   std::any visitBlock(FlowParser::BlockContext *context) override;
   std::any visitStatement(FlowParser::StatementContext *context) override;
   std::any visitNullLiteral(FlowParser::NullLiteralContext *context) override;
