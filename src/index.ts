@@ -1,10 +1,10 @@
 // this TS version is only for initial rapid prototyping
 
 import { CharStream, CommonTokenStream } from "antlr4ng";
-import { FlowLexer } from "./pre_transform/FlowLexer";
-import { FlowParser } from "./pre_transform/FlowParser";
+import { FlowLexer } from "./parser/generated/FlowLexer";
+import { FlowParser } from "./parser/generated/FlowParser";
 
-const input = `-1^2;`;
+const input = `{}`;
 const chars = CharStream.fromString(input);
 const lexer = new FlowLexer(chars);
 const tokens = new CommonTokenStream(lexer);

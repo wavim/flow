@@ -1,6 +1,5 @@
-node_modules
 dist
+node_modules
 
-src/pre_transform/*
-!src/pre_transform/grammar
-src/pre_transform/grammar/.antlr
+src/parser/.antlr
+src/parser/generated
