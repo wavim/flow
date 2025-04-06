@@ -8,8 +8,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 include_directories(src/parser/generated)
+include_directories(src/compiler)
 
 add_executable(flowc
+        src/flowc.cpp
         src/parser/generated/FlowLexer.cpp
         src/parser/generated/FlowLexer.h
         src/parser/generated/FlowParser.cpp
@@ -18,6 +20,7 @@ add_executable(flowc
         src/parser/generated/FlowParserBaseVisitor.h
         src/parser/generated/FlowParserVisitor.cpp
         src/parser/generated/FlowParserVisitor.h
-        src/flowc.cpp)
+        src/compiler/FlowCompiler.cpp
+        src/compiler/FlowCompiler.h)
 
 target_link_libraries(flowc PRIVATE antlr4_shared)
