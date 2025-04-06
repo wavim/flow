@@ -123,8 +123,9 @@ HexIntLiteral : '0' [xX] [0-9a-fA-F]+;
 
 // floating point numeral
 FloatLiteral:
-    NoPrefixDecimal FloatExponent
-    | NoPrefixDecimal? ('.' NoPrefixDecimal | NoPrefixDecimal '.') NoPrefixDecimal? FloatExponent?;
+    NoPrefixDecimal? ('.' NoPrefixDecimal | NoPrefixDecimal '.') NoPrefixDecimal? FloatExponent?
+    | NoPrefixDecimal FloatExponent
+    | 'inf';
 
 // identifier
 Identifier: [_a-zA-Z] [_a-zA-Z0-9]*;
