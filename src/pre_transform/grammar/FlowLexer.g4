@@ -53,6 +53,9 @@ CloseBracket : ']';
 OpenBrace    : '{';
 CloseBrace   : '}';
 
+// lambda arrow
+Arrow: '=>';
+
 // comparison operators
 Equal           : '=';
 NotEqual        : '!=';
