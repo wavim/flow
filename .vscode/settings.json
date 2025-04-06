@@ -1,8 +1,0 @@
-{
-	"antlr4.generation": {
-		"mode": "external",
-		"outputDir": "generated",
-		"visitors": true,
-		"listeners": false
-	}
-}
