@@ -4,7 +4,7 @@ import { CharStream, CommonTokenStream } from "antlr4ng";
 import { FlowLexer } from "./parser/generated/FlowLexer";
 import { FlowParser } from "./parser/generated/FlowParser";
 
-const input = `{}`;
+const input = `a:=b+=1;`;
 const chars = CharStream.fromString(input);
 const lexer = new FlowLexer(chars);
 const tokens = new CommonTokenStream(lexer);
@@ -13,8 +13,9 @@ const tree = parser.program();
 
 console.log(format(tree.toStringTree(parser)));
 
-function format(input: string, indent = 0): string {
+function format(input: string): string {
 	let formatted = "";
+	let indent = 0;
 
 	for (const char of input) {
 		if (char === "(") {
